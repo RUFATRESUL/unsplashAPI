@@ -43,9 +43,7 @@ function CardMenu() {
         }
         dispatch(addProduct(productInfo))
     }
-    
     const dispatch = useDispatch()
-
     const handlePageSet = (event,value) =>{
         setPage(value);
     }
@@ -66,11 +64,8 @@ function CardMenu() {
       fetchData()
     }, [])
     const startItemIndex = (page-1)*4;
-
     const totalPage = Math.ceil(data?.length / 4)
-
     const paginatedProducts = data?.slice(startItemIndex,startItemIndex+4)
-    
   return (
     <>
     <Container maxWidth='xl'>

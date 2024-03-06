@@ -3,7 +3,7 @@ import {Box,Typography,Drawer,Stack,IconButton,Container } from '@mui/material'
 import { BsCartX } from "react-icons/bs";
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch,useSelector } from 'react-redux';
-import { removeProduct } from '../redux/features/product/productSlice';
+import { addProduct,removeProduct,decrementProduct,incrementProduct } from '../redux/features/product/productSlice';
 import RenderIf from '../components/RenderIf'
 
 function AddToCart() {
@@ -26,18 +26,21 @@ function AddToCart() {
     <Box sx={{height:'240px'}}>
         <Box sx={{display:'flex',justifyItems:'center',alignItems:'center',flexDirection:'column',marginTop:'130px'}}>
   <RenderIf condition={basket?.length} renderElse='no product'>
-  {basket?.map((bask, index) => (
-    <React.Fragment key={index}>
-      <Container maxWidth='xl'>
-        <Box sx={{display:'flex',justifyContent:'space-around',alignItems:'center',marginBottom:'10px',width:'100%',border:'1px solid gray',padding:'6px'}}>
-              <img height={70} width={70} src={bask?.urls.full} alt="PHOTO" />
-              <Typography sx={{fontSize:'20px'}}>{bask?.user?.name}</Typography>
-              <IconButton onClick={() => dispatch(removeProduct(bask.id))} sx={{bgcolor:'red',fontSize:'15px',color:'white',borderRadius:'5px',height:'30px'}}>Delete</IconButton>
-        </Box>
-      </Container>
-    </React.Fragment>
-  ))}
-</RenderIf>
+      {basket?.map((bask, index) => (
+        <React.Fragment key={index}>
+          <Container maxWidth='xl'>
+            <Box sx={{display:'flex',justifyContent:'space-around',alignItems:'center',marginBottom:'10px',width:'100%',border:'1px solid gray',padding:'6px'}}>
+                  <img height={70} width={70} src={bask?.urls?.full} alt="PHOTO" />
+                  <Typography sx={{fontSize:'20px'}}>{bask?.user?.name}</Typography>
+                  <IconButton onClick={()=>dispatch(decrementProduct(bask.id))}>-</IconButton>
+                  <Stack>{bask.count || 0 }</Stack>
+                  <IconButton onClick={()=>dispatch(incrementProduct(bask.id))}>+</IconButton>
+                  <IconButton onClick={() => dispatch(removeProduct(bask.id))} sx={{bgcolor:'red',fontSize:'15px',color:'white',borderRadius:'5px',height:'30px'}}>Delete</IconButton>
+            </Box>
+          </Container>
+        </React.Fragment>
+      ))}
+    </RenderIf>
         </Box>
 
     </Box>

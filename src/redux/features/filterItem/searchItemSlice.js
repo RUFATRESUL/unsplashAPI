@@ -28,7 +28,7 @@ const itemSlice = createSlice({
         },
         searchDate(state,action){
             const date = state.originalData.filter((item)=>item.created_at.includes(action.payload))
-            console.log(date);
+            console.log(action.payload);
             state.data = date
             
         },

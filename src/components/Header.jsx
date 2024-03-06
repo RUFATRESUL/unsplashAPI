@@ -16,7 +16,7 @@ function Header({openMenu}) {
     dispatch(setOpen())
   }
   const cartMenuClose = () =>{
-    dispatch(setOpen())
+    dispatch(setOpen(false))
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -43,7 +43,7 @@ function Header({openMenu}) {
                anchor='right'
                open={open}
                onClose={cartMenuClose}
-              //  onClose={()=>setOpenCard(true)}
+              //  onClick={()=>setOpenCard(false)}
                sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box',width:'30%' }}}
                >
                 <AddToCart openMenu={openMenu}/>
